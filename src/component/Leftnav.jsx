@@ -49,7 +49,7 @@ const Leftnav = () => {
           );
         })}
         <hr className="my-5 border-white/[0.2]" />
-        <div className="text-gray-500 text-[12px]">Clone by : Rajdeep Dey</div>
+        <div className="text-gray-500 text-[12px]"></div>
       </div>
     </div>
   );

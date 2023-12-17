@@ -1,12 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import ReactPlayer from 'react-player/youtube';
-import { BsFillCheckCircleFill } from "react-icons/bs"
-import { AiOutlineLike, AiOutlineDislike,AiOutlineDownload } from "react-icons/ai"
-import { abbreviateNumber } from 'js-abbreviation-number';
-import { fetchDataFromApi } from '../util/api';
-import { Context } from '../context/contextApi';
-import SuggestionVideo from './SuggestionVideo';
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ReactPlayer from "react-player/youtube";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import {
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiOutlineDownload,
+} from "react-icons/ai";
+import { abbreviateNumber } from "js-abbreviation-number";
+import { fetchDataFromApi } from "../util/api";
+import { Context } from "../context/contextApi";
+import SuggestionVideo from "./SuggestionVideo";
 
 const VideoDetails = () => {
   const [video, setVideo] = useState();
@@ -70,67 +74,54 @@ const VideoDetails = () => {
                   {video?.author?.title}
                   {video?.author?.badges[0]?.type ===
                     "OFFICIAL_ARTIST_CHANNEL" && (
-                      <BsFillCheckCircleFill className="text-white/[0.5] text-[12px] ml-1" />
-                    )}
+                    <BsFillCheckCircleFill className="text-white/[0.5] text-[12px] ml-1" />
+                  )}
                 </div>
                 <div className="text-white/[0.7] text-sm">
                   {video?.author?.stats?.subscribersText}
                 </div>
-
               </div>
             </div>
             <div className="flex text-white mt-4 md:mt-2 hover:text-blue-700">
               <div className="flex items-center justify-center h-8 md:h-11 px-6 rounded-3xl bg-white/[0.15] cursor-pointer mr-5 ">
                 <AiOutlineLike className=" text-xs md:text-xl text-white mr-2 hover:text-blue-700" />
-                <span className=' text-xs md:text-[15px] text-white mr-2'>
-                {`${abbreviateNumber(
-                  video?.stats?.views,
-                  2
-                )}`}
-
+                <span className=" text-xs md:text-[15px] text-white mr-2">
+                  {`${abbreviateNumber(video?.stats?.views, 2)}`}
                 </span>
-                <button className='pl-2 ml-2 border-l-2 border-l-white'><AiOutlineDislike className=" text-xs md:text-xl text-white  mr-2 hover:text-blue-700" /></button>
+                <button className="pl-2 ml-2 border-l-2 border-l-white">
+                  <AiOutlineDislike className=" text-xs md:text-xl text-white  mr-2 hover:text-blue-700" />
+                </button>
               </div>
-                  <button className="flex items-center justify-center h-8 md:h-11 px-6 rounded-3xl bg-white/[0.15] cursor-pointer mr-5 text-xs md:text-[15px] text-white hover:text-blue-700"><AiOutlineDownload className='pr-2 text-xl md:text-3xl text-white '/> Download</button>
+              <button className="flex items-center justify-center h-8 md:h-11 px-6 rounded-3xl bg-white/[0.15] cursor-pointer mr-5 text-xs md:text-[15px] text-white hover:text-blue-700">
+                <AiOutlineDownload className="pr-2 text-xl md:text-3xl text-white " />{" "}
+                Download
+              </button>
             </div>
           </div>
-              <div className="w-[98%] ml-2 mt-4  bg-white/[0.15] p-3 rounded-2xl text-sm text-white/[0.7] ">
-                <div className="flex items-center">
-
-                <div className="flex items-center text-white/[0.7] text-sm  font-bold">
-                  {`${abbreviateNumber(
-                    video?.stats?.views,
-                    2
-                    )} Views`}
-                </div><span className='flex text-[24px] leading-none font-extrabold relative top-[-5px] mx-1 items-center'>
-                  .
-                </span>
-                <span className='font-bold'>
-
-                {video?.publishedDate}
-                </span>
-                    </div>
-                  <div className='h-[80px] lg:h-full  overflow-y-auto '>
-                  <span >{video?.description}</span>
-                  </div>
-                  
-
+          <div className="w-[98%] ml-2 mt-4  bg-white/[0.15] p-3 rounded-2xl text-sm text-white/[0.7] ">
+            <div className="flex items-center">
+              <div className="flex items-center text-white/[0.7] text-sm  font-bold">
+                {`${abbreviateNumber(video?.stats?.views, 2)} Views`}
               </div>
+              <span className="flex text-[24px] leading-none font-extrabold relative top-[-5px] mx-1 items-center">
+                .
+              </span>
+              <span className="font-bold">{video?.publishedDate}</span>
+            </div>
+            <div className="h-[80px] lg:h-full  overflow-y-auto ">
+              <span>{video?.description}</span>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col py-6 px-4 overflow-y-auto lg:w-[350px] xl:w-[400px]">
           {relatedVideos?.contents?.map((item, index) => {
             if (item?.type !== "video") return false;
-            return (
-              <SuggestionVideo
-                key={index}
-                video={item?.video}
-              />
-            );
+            return <SuggestionVideo key={index} video={item?.video} />;
           })}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default VideoDetails
+export default VideoDetails;
